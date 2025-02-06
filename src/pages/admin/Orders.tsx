@@ -11,6 +11,7 @@ interface Order {
   total_amount: number;
   shipping_address: string;
   created_at: string;
+  payment_method: 'card' | 'cash' | 'transfer';
 }
 
 const OrdersManagement = () => {
@@ -50,6 +51,7 @@ const OrdersManagement = () => {
               <TableHead>Order ID</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Amount</TableHead>
+              <TableHead>Payment Method</TableHead>
               <TableHead>Shipping Address</TableHead>
               <TableHead>Date</TableHead>
             </TableRow>
@@ -68,6 +70,7 @@ const OrdersManagement = () => {
                   </span>
                 </TableCell>
                 <TableCell>{order.total_amount} €</TableCell>
+                <TableCell className="capitalize">{order.payment_method}</TableCell>
                 <TableCell>{order.shipping_address}</TableCell>
                 <TableCell>{new Date(order.created_at).toLocaleDateString()}</TableCell>
               </TableRow>
@@ -80,3 +83,4 @@ const OrdersManagement = () => {
 };
 
 export default OrdersManagement;
+
