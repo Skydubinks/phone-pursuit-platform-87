@@ -34,7 +34,13 @@ const OrdersManagement = () => {
         return;
       }
 
-      setOrders(data);
+      // Add type assertion to ensure payment_method is one of the allowed values
+      const typedOrders = data.map(order => ({
+        ...order,
+        payment_method: order.payment_method as 'card' | 'cash' | 'transfer'
+      }));
+
+      setOrders(typedOrders);
     };
 
     fetchOrders();
