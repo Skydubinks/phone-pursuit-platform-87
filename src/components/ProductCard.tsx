@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { ShoppingCart, MessageCircle } from "lucide-react";
 
 interface ProductCardProps {
   product: {
@@ -17,6 +18,17 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, className }: ProductCardProps) {
+  const handleWhatsAppOrder = () => {
+    const message = encodeURIComponent(
+      `Bonjour, je souhaite commander le produit suivant:\n\n` +
+      `${product.name}\n` +
+      `Marque: ${product.brand}\n` +
+      `Prix: ${product.price} €`
+    );
+    const whatsappUrl = `https://wa.me/?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <Card className={cn("product-card", className)}>
       <CardHeader className="p-0">
@@ -41,9 +53,19 @@ export function ProductCard({ product, className }: ProductCardProps) {
           <p className="text-lg font-bold">{product.price} €</p>
         </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
-        <Button className="w-full" size="sm">
-          Ajouter au panier
+      <CardFooter className="flex gap-2 p-4 pt-0">
+        <Button className="flex-1 gap-2" size="sm">
+          <ShoppingCart className="h-4 w-4" />
+          Panier
+        </Button>
+        <Button 
+          variant="secondary" 
+          size="sm"
+          className="flex-1 gap-2"
+          onClick={handleWhatsAppOrder}
+        >
+          <MessageCircle className="h-4 w-4" />
+          WhatsApp
         </Button>
       </CardFooter>
     </Card>
