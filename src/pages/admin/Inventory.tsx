@@ -11,6 +11,7 @@ interface StockMovement {
   type: 'in' | 'out';
   reason: string;
   created_at: string;
+  created_by: string;
 }
 
 const InventoryManagement = () => {
@@ -33,7 +34,13 @@ const InventoryManagement = () => {
         return;
       }
 
-      setStockMovements(data);
+      // Validate and type cast the data
+      const validatedData = data.map(movement => ({
+        ...movement,
+        type: movement.type === 'in' ? 'in' as const : 'out' as const
+      }));
+
+      setStockMovements(validatedData);
     };
 
     fetchStockMovements();
