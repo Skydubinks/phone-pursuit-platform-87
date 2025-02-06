@@ -25,7 +25,8 @@ export function ProductCard({ product, className }: ProductCardProps) {
       `Marque: ${product.brand}\n` +
       `Prix: ${product.price} €`
     );
-    const whatsappUrl = `https://wa.me/?text=${message}`;
+    // Ajout du numéro WhatsApp (format international sans le +)
+    const whatsappUrl = `https://wa.me/33612345678?text=${message}`;
     window.open(whatsappUrl, '_blank');
   };
 
