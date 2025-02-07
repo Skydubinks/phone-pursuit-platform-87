@@ -177,6 +177,30 @@ export type Database = {
         }
         Relationships: []
       }
+      site_settings: {
+        Row: {
+          created_at: string
+          id: string
+          primary_color: string
+          theme: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          primary_color?: string
+          theme?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          primary_color?: string
+          theme?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       spatial_ref_sys: {
         Row: {
           auth_name: string | null
