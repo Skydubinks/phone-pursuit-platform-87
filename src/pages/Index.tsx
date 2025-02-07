@@ -1,6 +1,12 @@
 
+import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { ProductCard } from "@/components/ProductCard";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 const FEATURED_PRODUCTS = [
   {
@@ -36,6 +42,53 @@ const FEATURED_PRODUCTS = [
 ];
 
 const Index = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleAdminLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) throw signInError;
+
+      // Check if user is in admin_profiles
+      const { data: adminProfile, error: adminError } = await supabase
+        .from('admin_profiles')
+        .select('*')
+        .eq('id', signInData.user.id)
+        .single();
+
+      if (adminError || !adminProfile) {
+        await supabase.auth.signOut();
+        throw new Error("Accès non autorisé");
+      }
+
+      toast({
+        title: "Connexion réussie",
+        description: "Bienvenue dans l'interface d'administration",
+      });
+
+      navigate("/admin");
+    } catch (error) {
+      toast({
+        title: "Erreur de connexion",
+        description: error instanceof Error ? error.message : "Une erreur est survenue",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -51,6 +104,32 @@ const Index = () => {
                   <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
                     Les meilleurs téléphones au meilleur prix. Livraison gratuite et garantie 2 ans sur tous nos produits.
                   </p>
+                </div>
+                <div className="mt-8 space-y-4 rounded-lg border p-4">
+                  <h2 className="text-lg font-semibold">Connexion Admin</h2>
+                  <form onSubmit={handleAdminLogin} className="space-y-4">
+                    <div>
+                      <Input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="password"
+                        placeholder="Mot de passe"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <Button type="submit" disabled={isLoading}>
+                      {isLoading ? "Connexion..." : "Se connecter"}
+                    </Button>
+                  </form>
                 </div>
               </div>
               <div className="mx-auto w-full max-w-[400px] rotate-6">
