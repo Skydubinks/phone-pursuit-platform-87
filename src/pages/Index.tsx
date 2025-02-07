@@ -1,8 +1,6 @@
 
 import { Navbar } from "@/components/Navbar";
 import { ProductCard } from "@/components/ProductCard";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 
 const FEATURED_PRODUCTS = [
   {
@@ -53,13 +51,6 @@ const Index = () => {
                   <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
                     Les meilleurs téléphones au meilleur prix. Livraison gratuite et garantie 2 ans sur tous nos produits.
                   </p>
-                  <div className="mt-4">
-                    <Link to="/admin">
-                      <Button variant="outline">
-                        Accès Administrateur
-                      </Button>
-                    </Link>
-                  </div>
                 </div>
               </div>
               <div className="mx-auto w-full max-w-[400px] rotate-6">
