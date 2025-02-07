@@ -8,7 +8,8 @@ import {
   Box, 
   BarChart3, 
   LogOut,
-  Menu 
+  Menu,
+  Palette 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -73,6 +74,7 @@ const AdminDashboard = () => {
           <DashboardLink to="/admin/customers" icon={Users}>Customers</DashboardLink>
           <DashboardLink to="/admin/inventory" icon={Box}>Inventory</DashboardLink>
           <DashboardLink to="/admin/reports" icon={BarChart3}>Reports</DashboardLink>
+          <DashboardLink to="/admin/theme" icon={Palette}>Theme</DashboardLink>
         </nav>
         <div className="border-t p-4">
           <Button
@@ -112,6 +114,7 @@ const AdminDashboard = () => {
                 <DashboardLink to="/admin/customers" icon={Users}>Customers</DashboardLink>
                 <DashboardLink to="/admin/inventory" icon={Box}>Inventory</DashboardLink>
                 <DashboardLink to="/admin/reports" icon={BarChart3}>Reports</DashboardLink>
+                <DashboardLink to="/admin/theme" icon={Palette}>Theme</DashboardLink>
               </nav>
               <div className="border-t p-4">
                 <Button

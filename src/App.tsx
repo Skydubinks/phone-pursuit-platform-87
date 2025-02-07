@@ -12,6 +12,7 @@ import OrdersManagement from "./pages/admin/Orders";
 import CustomersManagement from "./pages/admin/Customers";
 import InventoryManagement from "./pages/admin/Inventory";
 import SalesReports from "./pages/admin/Reports";
+import ThemeManagement from "./pages/admin/Theme";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="customers" element={<CustomersManagement />} />
             <Route path="inventory" element={<InventoryManagement />} />
             <Route path="reports" element={<SalesReports />} />
+            <Route path="theme" element={<ThemeManagement />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
