@@ -27,11 +27,17 @@ const ThemeManagement = () => {
       if (error) throw error;
       return data;
     },
-    onSuccess: (data) => {
-      setSelectedTheme(data.theme);
-      setPrimaryColor(data.primary_color);
-    },
   });
+
+  // Mettre à jour les états locaux quand les données sont chargées
+  if (settings && !isLoading) {
+    if (selectedTheme !== settings.theme) {
+      setSelectedTheme(settings.theme);
+    }
+    if (primaryColor !== settings.primary_color) {
+      setPrimaryColor(settings.primary_color);
+    }
+  }
 
   const updateSettings = useMutation({
     mutationFn: async ({ theme, primary_color }: { theme: string; primary_color: string }) => {
