@@ -1,6 +1,8 @@
 
 import { Navbar } from "@/components/Navbar";
 import { ProductCard } from "@/components/ProductCard";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const FEATURED_PRODUCTS = [
   {
@@ -12,7 +14,7 @@ const FEATURED_PRODUCTS = [
     isNew: true,
   },
   {
-    id: "2",
+    id: "2", 
     name: "Samsung Galaxy S24 Ultra",
     price: 1299,
     brand: "Samsung",
@@ -21,7 +23,7 @@ const FEATURED_PRODUCTS = [
   },
   {
     id: "3",
-    name: "Google Pixel 8 Pro",
+    name: "Google Pixel 8 Pro", 
     price: 999,
     brand: "Google",
     image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1000",
@@ -51,6 +53,13 @@ const Index = () => {
                   <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
                     Les meilleurs téléphones au meilleur prix. Livraison gratuite et garantie 2 ans sur tous nos produits.
                   </p>
+                  <div className="mt-4">
+                    <Link to="/admin">
+                      <Button variant="outline">
+                        Accès Administrateur
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
               <div className="mx-auto w-full max-w-[400px] rotate-6">
